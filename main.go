@@ -19,11 +19,20 @@ type BinaryFile struct {
 // }
 
 func (bf *BinaryFile) PrintTo(des io.Writer) {
+	formatting := ""
+	switch bf.printType {
+	case "x":
+		formatting = fmt.Sprintf("%%02%s ", bf.printType)
+	case "b":
+		formatting = fmt.Sprintf("%%08%s ", bf.printType)
+	case "o":
+		formatting = fmt.Sprintf("%%04%s ", bf.printType)
 
-	formatting := fmt.Sprintf("%%%s ", bf.printType)
+	}
+
 	for i := 0; i < len(bf.data); i++ {
 		if i%8 == 0 {
-			fmt.Fprintf(des, "0x%x        ", i)
+			fmt.Fprintf(des, "0x%08x    ", i)
 
 		} else {
 			if (i+1)%8 == 0 {
@@ -54,5 +63,10 @@ func main() {
 		os.Exit(0)
 	}
 	print.data = string(data)
+
+	if err != nil {
+		fmt.Print(err)
+	}
+	print.PrintTo(os.Stdout)
 
 }

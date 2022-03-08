@@ -37,23 +37,13 @@ func TestX(t *testing.T) {
 }
 
 func TestX1(t *testing.T) {
-	var backed string = "b"
-
-	str := fmt.Sprintf("0x %%%v", backed)
-
-	fmt.Print(str)
-	//x:=str[1]
-	for i := 0; i < len(str); i++ {
-		x := str[i]
-		fmt.Fprintf(os.Stdout, "%b ", x)
-
-	}
+	fmt.Printf("|%06d|%-06x|\n", 12, 345)
 
 }
 
 func TestBinaryFile_PrintTo(t *testing.T) {
 	var test BinaryFile
 	test.data = "asdasd各种牛人，膜拜 The acme of foolishness这边的文章都不错"
-	test.printType = "b"
+	test.printType = "x"
 	test.PrintTo(os.Stdout)
 }
